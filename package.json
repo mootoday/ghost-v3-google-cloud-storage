@@ -1,0 +1,30 @@
+{
+  "name": "ghost-v3-google-cloud-storage",
+  "version": "1.3.0",
+  "description": "A Google Cloud Storage adapter for Ghost v3 (www.ghost.org).",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikenikles/ghost-v3-google-cloud-storage.git"
+  },
+  "keywords": [
+    "ghost",
+    "cms",
+    "google cloud storage",
+    "storage",
+    "adapter"
+  ],
+  "author": "Mike Nikles, @mikenikles",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mikenikles/ghost-v3-google-cloud-storage/issues"
+  },
+  "homepage": "https://github.com/mikenikles/ghost-v3-google-cloud-storage#readme",
+  "dependencies": {
+    "@google-cloud/storage": "^4.1.1",
+    "ghost-storage-base": "0.0.3"
+  }
+}
