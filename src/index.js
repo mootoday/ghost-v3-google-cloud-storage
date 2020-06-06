@@ -68,7 +68,13 @@ class GoogleCloudStorageAdapter extends BaseAdapter {
   }
 
   read(options = {}) {
-    const readStream = this.bucket.file(options.path).createReadStream()
+    const prefix = `https://${this.assetDomain}/`
+    let path = options.path
+    if (path.indexOf(prefix) === 0) {
+      path = path.slice(prefix.length);
+    }
+    
+    const readStream = this.bucket.file(path).createReadStream()
     let contents = null;
     return new Promise(function(resolve, reject) {
       readStream.on('error', function(err) {
@@ -76,13 +82,13 @@ class GoogleCloudStorageAdapter extends BaseAdapter {
       });
       readStream.on('data', function(data) {
         if (contents) {
-          contents = data;
-        } else {
           contents = Buffer.concat([contents, data]);
+        } else {
+          contents = data;
         }
       });
       readStream.on('end', function() {
-        return resolve(content);
+        return resolve(contents);
       });
     });
   }
