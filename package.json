@@ -1,6 +1,6 @@
 {
   "name": "ghost-v3-google-cloud-storage",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "A Google Cloud Storage adapter for Ghost v3 (www.ghost.org).",
   "main": "src/index.js",
   "scripts": {
