@@ -8,21 +8,14 @@ class GoogleCloudStorageAdapter extends BaseAdapter {
   constructor(config = {}) {
     super(config);
 
-    let storage;
-    
-    if (config.keyFilename) {
-      storage = new Storage({
-        keyFilename: config.keyFilename
-      });
-    } else {
-      storage = new Storage();
-    }
+    const storage = config.keyFilename ? new Storage({ keyFilename: config.keyFilename }) : new Storage();
     
     this.bucket = storage.bucket(config.bucket);
     this.assetDomain = `${config.bucket}.storage.googleapis.com`;
     if (config.cdn) {
       this.assetDomain = config.cdn;
     }
+    this.pathPrefix = config.pathPrefix;
   }
 
   exists(fileName, targetDir) {
@@ -35,7 +28,7 @@ class GoogleCloudStorageAdapter extends BaseAdapter {
   }
 
   save(image) {
-    const targetDir = this.getTargetDir();
+    const targetDir = this.getTargetDir(this.pathPrefix);
     let targetFilename;
     return this.getUniqueFileName(image, targetDir)
       .then(fileName => {
@@ -68,8 +61,8 @@ class GoogleCloudStorageAdapter extends BaseAdapter {
   }
 
   read(options = {}) {
-    const prefix = `https://${this.assetDomain}/`
-    let path = options.path
+    const prefix = `https://${this.assetDomain}/`;
+    let path = options.path;
     if (path.indexOf(prefix) === 0) {
       path = path.slice(prefix.length);
     }
