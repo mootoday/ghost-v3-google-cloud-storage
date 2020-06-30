@@ -39,6 +39,7 @@ Open your `config.[env].json` in the Ghost root directory and add a `storage` se
   "gcs": {
     "bucket": "your-gcs-bucket-name",
     "keyFilename": "path-to-your-service-account.json",
+    "pathPrefix": "content/images",
     "cdn": "optional-cdn-domain"
   }
 }
@@ -49,3 +50,5 @@ Open your `config.[env].json` in the Ghost root directory and add a `storage` se
 **keyFilename**: Optional if Ghost is hosted on GCP.
 
 **cdn**: Optional. If you use a CDN, this is the CDN base URL.
+
+**pathPrefix**: Optional. Uploads default to root of the bucket.
